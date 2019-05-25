@@ -24,14 +24,7 @@ public:
 		previous = nullptr;
 	}
 
-	/*Node()//destrucrot
-	{
-	if(next)
-	delete next;
-	if(previous)
-	delete previous;
-
-	}*/
+	
 };
 
 template <class T>
@@ -41,10 +34,7 @@ class List
 public:
 	Node <T> *head;
 	Node <T> *tail;
-	/*	~List()//destrucrot
-	{
-	this->clear();
-	}*/
+	
 	List() :head(nullptr), tail(nullptr) {};
 	friend ostream& operator<<(ostream &out, const List<T> &list)
 	{
