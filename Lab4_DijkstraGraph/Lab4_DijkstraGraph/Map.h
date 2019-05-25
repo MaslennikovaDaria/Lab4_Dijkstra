@@ -6,7 +6,6 @@ template <typename Tk, typename Td>
 class Map
 {
 private:
-	//template <typename Tk, typename Td>
 	class TreeNode
 	{
 	public:
@@ -31,14 +30,14 @@ private:
 	TreeNode*root;
 
 	int size;
-	//void clearPrivate(TreeNode*);
+	void clearPrivate(TreeNode*);
 	List<Tk> get_key(List<Tk> head, TreeNode* tempr)
 	{
 		if (tempr != nullptr)
 		{
-
-			head = get_key(head, tempr->left);
-			head = get_key(head, tempr->right);
+		
+			head=get_key(head, tempr->left);
+			head=get_key(head, tempr->right);
 			head.push_back(tempr->key);
 		}
 		return head;
@@ -55,18 +54,17 @@ private:
 	}
 public:
 	Map() :size(0), root(nullptr) {}; //constructor
-									  //	~Map();//destructor
 	void insert(Tk, Td);
-	void rotL(TreeNode*);//private
-	void rotR(TreeNode*);//private
-	void InsertBalance(TreeNode*);//private
+	void rotL(TreeNode*);
+	void rotR(TreeNode*);
+	void InsertBalance(TreeNode*);
 	void clear();
 	TreeNode* find(Tk);
 	List<Tk> get_keys();
 	List<Td> get_values();
 	int get_size();
 	void remove(Tk);
-	void RemoveBalance(TreeNode*);//private
+	void RemoveBalance(TreeNode*);
 };
 
 
@@ -76,7 +74,7 @@ List<Tk> Map<Tk, Td>::get_keys()
 {
 	List<Tk> head;
 	TreeNode* tempr = root;
-	head = get_key(head, tempr);
+	head=get_key(head, tempr);
 	return head;
 }
 template <typename Tk, typename Td>
@@ -84,20 +82,16 @@ List<Td> Map<Tk, Td>::get_values()
 {
 	List<Td> head;
 	TreeNode* tempr = root;
-	head = get_data(head, tempr);
+	head=get_data(head, tempr);
 	return head;
 }
-//
-//template <typename Tk, typename Td> //destructor 
-//Map <Tk, Td>::~Map()
-//{
-//	clearPrivate(root);
-//}
+
+
 template <typename Tk, typename Td>
 void Map <Tk, Td>::insert(Tk key, Td data)
 {
-	TreeNode *tempr = nullptr;
-	TreeNode *previous = nullptr;
+	TreeNode *tempr=nullptr;
+	TreeNode *previous=nullptr;
 	TreeNode *current = new TreeNode(key, data);
 	tempr = root;
 	if (root == nullptr)//if there is no tree
@@ -115,7 +109,7 @@ void Map <Tk, Td>::insert(Tk key, Td data)
 			else
 				tempr = tempr->left;// going right
 		}
-		current->parent = previous;//
+		current->parent = previous;
 		if (previous->key < current->key)//if current key less than previous, it's a left son
 			previous->right = current;
 		else
@@ -149,7 +143,7 @@ void Map <Tk, Td>::rotL(TreeNode* current)
 			root = child;
 		else
 		{
-			if (current == current->parent->left)
+			if (current== current->parent->left)
 				current->parent->left = child;
 			else
 				current->parent->right = child;
@@ -160,7 +154,7 @@ void Map <Tk, Td>::rotL(TreeNode* current)
 }
 
 template <typename Tk, typename Td>
-typename Map<Tk, Td>::TreeNode* Map<Tk, Td>::find(Tk key)
+typename Map<Tk, Td>:: TreeNode* Map<Tk, Td>::find(Tk key)
 {
 	TreeNode*temp = root;
 	while (temp)
@@ -224,14 +218,14 @@ void Map <Tk, Td>::InsertBalance(TreeNode*tempr)
 			if (grandparent->right != nullptr)
 			{
 				uncle = grandparent->right;
-				if (uncle->color_red = true)
+				if (uncle->color_red = true) 
 				{ //if uncle is red, grandparent is red & parent and uncle are black
 					tempr->parent->color_red = false;
 					uncle->color_red = false;
 					grandparent->color_red = true;
 					tempr = grandparent;
 				}
-
+				
 			}
 			else
 			{
@@ -276,20 +270,20 @@ void Map <Tk, Td>::InsertBalance(TreeNode*tempr)
 }
 
 
-//template <typename Tk, typename Td>
-//void Map <Tk, Td>::clearPrivate(TreeNode*tempr)
-//{
-//	if (tempr != nullptr)
-//	{
-//		if (tempr->right != nullptr)
-//			clearPrivate(tempr->right);
-//		if (tempr->left != nullptr)
-//			clearPrivate(tempr->left);
-//		size--;
-//		delete tempr;
-//		tempr = nullptr;
-//	}
-//}
+template <typename Tk, typename Td>
+void Map <Tk, Td>::clearPrivate(TreeNode*tempr)
+{
+	if (tempr != nullptr)
+	{
+		if (tempr->right != nullptr)
+			clearPrivate(tempr->right);
+		if (tempr->left != nullptr)
+			clearPrivate(tempr->left);
+		size--;
+		delete tempr;
+		tempr = nullptr;
+	}
+}
 
 template <typename Tk, typename Td>
 int Map <Tk, Td>::get_size()//function for tests 
@@ -304,8 +298,8 @@ void Map <Tk, Td>::remove(Tk key)
 	{
 		return;
 	}
-
-	TreeNode* deleting = find(key);
+	
+	TreeNode* deleting = find(key); 
 	if (deleting == nullptr) //if we don't have this element, we do not delete anything
 		return;
 
@@ -331,7 +325,7 @@ void Map <Tk, Td>::remove(Tk key)
 		}
 		moving = temp; //find node without left child
 	}
-	if (moving->left != nullptr)
+	if (moving->left != nullptr) 
 		temp = moving->left;
 	else
 	{
@@ -340,10 +334,10 @@ void Map <Tk, Td>::remove(Tk key)
 		else
 			temp = nullptr;
 	}
-	if (temp != nullptr)
+	if (temp != nullptr) 
 		temp->parent = moving->parent;
 
-	if (moving->parent == nullptr)
+	if (moving->parent == nullptr) 
 		root = temp;
 	else
 	{
@@ -376,14 +370,14 @@ void Map <Tk, Td>::RemoveBalance(TreeNode* current)
 
 			if (current->parent->left == current) //if node is a left child
 			{
-				temp = current->parent->right;
-				if (temp->color_red) //if brother is red
-				{
-					temp->color_red = false; //brother = black
-					current->parent->color_red = true; //parent = red
-					rotL(current->parent);
-					temp = current->parent->right;
-				}
+				temp = current->parent->right; 
+					if (temp->color_red) //if brother is red
+					{
+						temp->color_red = false; //brother = black
+						current->parent->color_red = true; //parent = red
+						rotL(current->parent);
+						temp = current->parent->right;
+					}
 				if (!temp->right->color_red && !temp->left->color_red) // if both children  are black
 				{
 					temp->color_red = true;
