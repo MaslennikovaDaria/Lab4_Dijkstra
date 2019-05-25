@@ -1,0 +1,8 @@
+Berlin;Moscow;20;30
+Moscow;Tokyo;15;5
+Moscow;Vladivostok;3;2
+Vladivostok;Tokyo;5;5
+Berlin;Stambul;10;34
+Stambul;Tokyo;40;12
+Stambul;Vladivostok;2;3
+Stambul;Moscow;1;9
